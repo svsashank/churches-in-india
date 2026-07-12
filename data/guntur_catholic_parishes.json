@@ -2,112 +2,112 @@
  {
   "year": 1950,
   "parishes": 23,
-  "catholics": 3808722772831,
+  "catholics": null,
   "pct_catholic": "1.7%",
   "source": "Annuario Pontificio 1951"
  },
  {
   "year": 1970,
   "parishes": 34,
-  "catholics": 6974736000001,
+  "catholics": null,
   "pct_catholic": "1.9%",
   "source": "Annuario Pontificio 1971"
  },
  {
   "year": 1980,
   "parishes": 44,
-  "catholics": 10607233160723,
+  "catholics": null,
   "pct_catholic": "3.2%",
   "source": "Annuario Pontificio 1981"
  },
  {
   "year": 1990,
   "parishes": 51,
-  "catholics": 12647345900002,
+  "catholics": null,
   "pct_catholic": "2.8%",
   "source": "Annuario Pontificio 1991"
  },
  {
   "year": 1999,
   "parishes": 66,
-  "catholics": 16351648614623,
+  "catholics": null,
   "pct_catholic": "3.4%",
   "source": "Annuario Pontificio 2000"
  },
  {
   "year": 2000,
   "parishes": 72,
-  "catholics": 17261648969823,
+  "catholics": null,
   "pct_catholic": "3.5%",
   "source": "Annuario Pontificio 2001"
  },
  {
   "year": 2001,
   "parishes": 71,
-  "catholics": 18315049805403,
+  "catholics": null,
   "pct_catholic": "3.7%",
   "source": "Annuario Pontificio 2002"
  },
  {
   "year": 2002,
   "parishes": 72,
-  "catholics": 18515020251909,
+  "catholics": null,
   "pct_catholic": "9.1%",
   "source": "Annuario Pontificio 2003"
  },
  {
   "year": 2003,
   "parishes": 74,
-  "catholics": 19196450352103,
+  "catholics": null,
   "pct_catholic": "3.8%",
   "source": "Annuario Pontificio 2004"
  },
  {
   "year": 2004,
   "parishes": 74,
-  "catholics": 19563050445203,
+  "catholics": null,
   "pct_catholic": "3.9%",
   "source": "Annuario Pontificio 2005"
  },
  {
   "year": 2006,
   "parishes": 79,
-  "catholics": 21809751509454,
+  "catholics": null,
   "pct_catholic": "4.2%",
   "source": "Annuario Pontificio 2007"
  },
  {
   "year": 2013,
   "parishes": 84,
-  "catholics": 21890060663803,
+  "catholics": null,
   "pct_catholic": "3.6%",
   "source": "Annuario Pontificio 2014"
  },
  {
   "year": 2016,
   "parishes": 91,
-  "catholics": 31000063060004,
+  "catholics": null,
   "pct_catholic": "4.9%",
   "source": "Annuario Pontificio 2017"
  },
  {
   "year": 2019,
   "parishes": 100,
-  "catholics": 32160065436604,
+  "catholics": null,
   "pct_catholic": "4.9%",
   "source": "Annuario Pontificio 2020"
  },
  {
   "year": 2021,
   "parishes": 103,
-  "catholics": 52977061883808,
+  "catholics": null,
   "pct_catholic": "8.6%",
   "source": "Annuario Pontificio 2022"
  },
  {
   "year": 2023,
   "parishes": 107,
-  "catholics": 53900066450008,
+  "catholics": null,
   "pct_catholic": "8.1%",
   "source": "Annuario Pontificio 2024"
  }
