@@ -44,4 +44,9 @@ for el in data.get("elements", []):
     })
 path = os.path.join(BASE, "osm_churches.json")
 json.dump(out, open(path, "w"), ensure_ascii=False, indent=1)
-print(f"{len(out)} OSM churches -> {path}")
+gj = {"type": "FeatureCollection", "features": [{
+    "type": "Feature",
+    "properties": {"name": c["name"], "denomination": c["denomination"], "source": "osm"},
+    "geometry": {"type": "Point", "coordinates": [c["lon"], c["lat"]]}} for c in out]}
+json.dump(gj, open(os.path.join(BASE, "osm_churches.geojson"), "w"), ensure_ascii=False)
+print(f"{len(out)} OSM churches -> {path} (+ .geojson)")

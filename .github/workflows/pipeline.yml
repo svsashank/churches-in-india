@@ -1,0 +1,55 @@
+name: pipeline
+on:
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    env:
+      GOOGLE_MAPS_API_KEY: ${{ secrets.GOOGLE_MAPS_API_KEY }}
+      EE_SA_JSON: ${{ secrets.EE_SA_JSON }}
+      EE_PROJECT: ${{ secrets.EE_PROJECT }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install deps
+        run: pip install -q shapely requests beautifulsoup4 earthengine-api
+
+      - name: "Stage A: OSM churches (keyless)"
+        run: python3 scripts/04_osm_churches.py
+
+      - name: "Stage B: Catholic calibration (keyless)"
+        continue-on-error: true
+        run: python3 scripts/07_catholic_calibration.py
+
+      - name: "Stage C: Places sweep (needs GOOGLE_MAPS_API_KEY secret)"
+        if: env.GOOGLE_MAPS_API_KEY != ''
+        run: python3 scripts/03_places_sweep.py
+
+      - name: "Stage D: merge"
+        run: python3 scripts/06_analyze.py merge
+
+      - name: "Stage E: Earth Engine building dating (needs EE_SA_JSON + EE_PROJECT secrets)"
+        if: env.EE_SA_JSON != ''
+        run: |
+          echo "$EE_SA_JSON" > /tmp/sa.json
+          python3 scripts/05_ee_building_dates.py --project "$EE_PROJECT" --sa-key /tmp/sa.json
+
+      - name: "Stage F: report + map data"
+        if: env.EE_SA_JSON != ''
+        run: python3 scripts/06_analyze.py report
+
+      - name: Commit results
+        run: |
+          git config user.name "svsashank"
+          git config user.email "svsashank@users.noreply.github.com"
+          git add data/
+          git diff --cached --quiet || git commit -m "pipeline run: $(date -u +%Y-%m-%dT%H:%MZ)"
+          git push

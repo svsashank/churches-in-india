@@ -28,10 +28,16 @@ YEARS = list(range(2016, 2024))
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--project", required=True)
+    ap.add_argument("--sa-key", default=None, help="service account JSON key file (for CI)")
     ap.add_argument("--infile", default=os.path.join(BASE, "churches_merged.json"))
     args = ap.parse_args()
 
-    ee.Initialize(project=args.project)
+    if args.sa_key:
+        sa = json.load(open(args.sa_key))
+        creds = ee.ServiceAccountCredentials(sa["client_email"], args.sa_key)
+        ee.Initialize(creds, project=args.project)
+    else:
+        ee.Initialize(project=args.project)
     col = ee.ImageCollection("GOOGLE/Research/open-buildings-temporal/v1")
 
     churches = json.load(open(args.infile))

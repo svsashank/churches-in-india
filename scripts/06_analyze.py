@@ -40,11 +40,15 @@ def classify(name):
 def merge():
     from shapely.geometry import shape, Point
     boundary = shape(json.load(open(os.path.join(BASE, "guntur_boundary.geojson")))["features"][0]["geometry"])
-    places = json.load(open(os.path.join(BASE, "places_churches.json")))
-    try:
-        osm = json.load(open(os.path.join(BASE, "osm_churches.json")))
-    except FileNotFoundError:
-        osm = []
+    def load(name):
+        try:
+            return json.load(open(os.path.join(BASE, name)))
+        except FileNotFoundError:
+            return []
+    places = load("places_churches.json")
+    osm = load("osm_churches.json")
+    if not places and not osm:
+        raise SystemExit("no input lists found")
     for p in places: p["source"] = "gmaps"
     for o in osm: o["source"] = "osm"
 

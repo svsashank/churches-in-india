@@ -118,6 +118,17 @@ map.on('load',async()=>{
     churches=await r.json();
     initChurches();
   }catch(e){
+    try{
+      const r2=await fetch('data/osm_churches.geojson');
+      if(r2.ok){
+        const osm=await r2.json();
+        map.addSource('osm',{type:'geojson',data:osm});
+        map.addLayer({id:'osm',type:'circle',source:'osm',paint:{'circle-color':'#ffb454','circle-radius':['interpolate',['linear'],['zoom'],7,1.8,12,5],'circle-opacity':.85,'circle-stroke-width':.5,'circle-stroke-color':'rgba(0,0,0,.5)'}});
+        map.on('click','osm',ev=>{const p=ev.features[0].properties;new maplibregl.Popup().setLngLat(ev.lngLat).setHTML(`<b>${p.name||'unnamed'}</b><br>${p.denomination||'denomination unknown'} · OSM · not yet dated`).addTo(map)});
+        S.innerHTML=`<b>Stage 2 of 3 — locations, undated.</b> ${osm.features.length.toLocaleString()} churches from OpenStreetMap shown as amber points. The Google Places sweep and satellite dating run next — add GOOGLE_MAPS_API_KEY and EE_SA_JSON secrets and re-run the pipeline action.`;
+        return;
+      }
+    }catch(e2){}
     S.innerHTML='<b>Stage 1 of 3 — awaiting sweep.</b><br>Showing the search frame: 1,652 seed cells over ~13,500 km² of undivided Guntur (Guntur · Palnadu · Bapatla). Run the pipeline in <a style="color:var(--accent)" href="https://github.com/svsashank/churches-in-india">/scripts</a>, commit <span style="color:var(--text)">data/churches.geojson</span>, and this page becomes the result.';
   }
 });
