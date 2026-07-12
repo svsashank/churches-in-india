@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Churches in India — Guntur Pilot</title>
+<link href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0b0e14; --panel:rgba(11,14,20,.88); --line:#232a38;
+    --text:#e8e4da; --dim:#8a94a6; --accent:#ffb454;
+    --y17:#f5d76e; --y18:#f7b955; --y19:#f79a3e; --y20:#f5762b;
+    --y21:#ef4e20; --y22:#e02f2f; --y23:#ff5c8a; --pre:#5b7a9d; --und:#3a4356;
+  }
+  *{box-sizing:border-box;margin:0}
+  html,body,#map{height:100%;background:var(--ink)}
+  body{font-family:'IBM Plex Mono',monospace;color:var(--text)}
+
+  #panel{position:fixed;top:16px;left:16px;width:330px;max-height:calc(100% - 32px);
+    background:var(--panel);border:1px solid var(--line);backdrop-filter:blur(8px);
+    padding:18px 18px 14px;overflow-y:auto;z-index:5}
+  h1{font-family:'Space Grotesk',sans-serif;font-size:19px;font-weight:700;letter-spacing:.01em;line-height:1.2}
+  .eyebrow{font-size:10px;letter-spacing:.22em;color:var(--accent);margin-bottom:6px}
+  .sub{font-size:11px;color:var(--dim);margin-top:6px;line-height:1.55}
+  .block{border-top:1px solid var(--line);margin-top:14px;padding-top:12px}
+  .label{font-size:10px;letter-spacing:.18em;color:var(--dim);margin-bottom:8px}
+  #status{font-size:11px;line-height:1.6}
+  #status b{color:var(--accent);font-weight:500}
+
+  /* detection sweep timeline */
+  #sweep{display:none}
+  #bars{display:flex;align-items:flex-end;gap:3px;height:52px;margin-bottom:6px}
+  .bar{flex:1;display:flex;flex-direction:column;justify-content:flex-end;cursor:pointer}
+  .bar i{display:block;background:var(--und);min-height:2px;transition:height .3s}
+  .bar span{font-size:9px;color:var(--dim);text-align:center;margin-top:4px}
+  .bar.on i{box-shadow:0 0 8px rgba(255,180,84,.35)}
+  input[type=range]{width:100%;accent-color:var(--accent)}
+  #yearReadout{font-family:'Space Grotesk',sans-serif;font-size:26px;font-weight:700;color:var(--accent)}
+  #cumCount{font-size:11px;color:var(--dim)}
+
+  .legend{display:grid;grid-template-columns:14px 1fr;gap:6px 8px;font-size:11px;align-items:center}
+  .sw{width:12px;height:12px;border-radius:50%}
+  .chip{display:inline-block;font-size:10px;border:1px solid var(--line);padding:3px 8px;margin:0 5px 5px 0;cursor:pointer;color:var(--dim)}
+  .chip.on{color:var(--text);border-color:var(--accent)}
+  footer{font-size:9.5px;color:var(--dim);line-height:1.6;margin-top:12px}
+  footer a{color:var(--dim)}
+  @media (max-width:640px){#panel{width:calc(100% - 32px);max-height:52%}}
+  .maplibregl-popup-content{background:var(--panel);color:var(--text);font-family:'IBM Plex Mono',monospace;font-size:11px;border:1px solid var(--line)}
+</style>
+</head>
+<body>
+<div id="map"></div>
+<div id="panel">
+  <div class="eyebrow">CHURCHES IN INDIA · PILOT 01</div>
+  <h1>Guntur — dating church construction from orbit</h1>
+  <div class="sub">Scraped church locations × Google Open Buildings 2.5D Temporal (Sentinel-2). The year a structure first appears at a church's coordinates is its estimated construction year, 2016–2023.</div>
+
+  <div class="block">
+    <div class="label">PIPELINE STATUS</div>
+    <div id="status">Checking for data…</div>
+  </div>
+
+  <div class="block" id="sweep">
+    <div class="label">DETECTION SWEEP</div>
+    <div id="bars"></div>
+    <input type="range" id="yr" min="2016" max="2023" step="1" value="2023">
+    <div style="display:flex;justify-content:space-between;align-items:baseline;margin-top:4px">
+      <div id="yearReadout">2023</div><div id="cumCount"></div>
+    </div>
+    <div class="label" style="margin-top:12px">DENOMINATION</div>
+    <div id="chips"></div>
+  </div>
+
+  <div class="block">
+    <div class="label">LEGEND</div>
+    <div class="legend" id="legend">
+      <span class="sw" style="background:var(--pre)"></span><span>building predates 2016</span>
+      <span class="sw" style="background:linear-gradient(90deg,var(--y17),var(--y23));border-radius:3px"></span><span>appeared 2017 → 2023</span>
+      <span class="sw" style="background:var(--und)"></span><span>no structure detected</span>
+      <span class="sw" style="background:none;border:1px solid var(--accent);border-radius:2px"></span><span>district boundary (undivided Guntur)</span>
+    </div>
+  </div>
+
+  <footer>
+    Sources: Google Places / OSM (locations) · Open Buildings 2.5D Temporal, CC-BY 4.0 (building presence 2016–23) · Esri World Imagery (basemap) · calibration: Annuario Pontificio via catholic-hierarchy.org.<br>
+    Known limits: dates buildings, not congregations — house churches and rented halls are invisible here. This is a floor on construction, not a ceiling.
+  </footer>
+</div>
+
+<script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+<script>
+const YEARS=[2017,2018,2019,2020,2021,2022,2023];
+const YC={'2017':'#f5d76e','2018':'#f7b955','2019':'#f79a3e','2020':'#f5762b','2021':'#ef4e20','2022':'#e02f2f','2023':'#ff5c8a','pre-2016':'#5b7a9d','undetected':'#3a4356'};
+
+const map=new maplibregl.Map({
+  container:'map',
+  style:{version:8,glyphs:"https://demotiles.maplibre.org/font/{fontstack}/{range}.pbf",
+    sources:{esri:{type:'raster',tiles:['https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'],tileSize:256,attribution:'Esri World Imagery'}},
+    layers:[{id:'base',type:'raster',source:'esri',paint:{'raster-saturation':-0.55,'raster-brightness-max':0.85}}]},
+  center:[80.15,16.2],zoom:8.6,attributionControl:false});
+map.addControl(new maplibregl.NavigationControl({showCompass:false}),'bottom-right');
+map.addControl(new maplibregl.AttributionControl({compact:true}),'bottom-left');
+
+const S=document.getElementById('status');
+let churches=null,activeDenoms=new Set();
+
+map.on('load',async()=>{
+  map.addSource('boundary',{type:'geojson',data:'data/guntur_boundary.geojson'});
+  map.addLayer({id:'boundary-line',type:'line',source:'boundary',paint:{'line-color':'#ffb454','line-width':1.6,'line-opacity':.9}});
+  map.addSource('grid',{type:'geojson',data:'data/search_grid.geojson'});
+  map.addLayer({id:'grid-line',type:'line',source:'grid',paint:{'line-color':'#8a94a6','line-width':.4,'line-opacity':.16}});
+
+  try{
+    const r=await fetch('data/churches.geojson');
+    if(!r.ok)throw 0;
+    churches=await r.json();
+    initChurches();
+  }catch(e){
+    S.innerHTML='<b>Stage 1 of 3 — awaiting sweep.</b><br>Showing the search frame: 1,652 seed cells over ~13,500 km² of undivided Guntur (Guntur · Palnadu · Bapatla). Run the pipeline in <a style="color:var(--accent)" href="https://github.com/svsashank/churches-in-india">/scripts</a>, commit <span style="color:var(--text)">data/churches.geojson</span>, and this page becomes the result.';
+  }
+});
+
+function initChurches(){
+  const n=churches.features.length;
+  const hist={};churches.features.forEach(f=>{hist[f.properties.built]=(hist[f.properties.built]||0)+1});
+  S.innerHTML=`<b>Stage 3 — dated.</b> ${n.toLocaleString()} churches on the map. pre-2016: ${(hist['pre-2016']||0).toLocaleString()} · new 2017–23: ${YEARS.reduce((a,y)=>a+(hist[y]||0),0).toLocaleString()} · undetected: ${(hist['undetected']||0).toLocaleString()}`;
+  map.setPaintProperty('grid-line','line-opacity',.05);
+
+  map.addSource('churches',{type:'geojson',data:churches});
+  map.addLayer({id:'ch',type:'circle',source:'churches',paint:{
+    'circle-color':['match',['get','built'],...Object.entries(YC).flat(),'#888'],
+    'circle-radius':['interpolate',['linear'],['zoom'],7,['case',['in',['get','built'],['literal',['pre-2016','undetected']]],1.6,3],12,['case',['in',['get','built'],['literal',['pre-2016','undetected']]],4,7]],
+    'circle-opacity':.9,'circle-stroke-width':.5,'circle-stroke-color':'rgba(0,0,0,.5)'}});
+  map.on('click','ch',e=>{const p=e.features[0].properties;
+    new maplibregl.Popup().setLngLat(e.lngLat).setHTML(`<b>${p.name||'unnamed'}</b><br>appeared: ${p.built}<br>${p.denom||''} · ${p.source||''}`).addTo(map)});
+  map.on('mouseenter','ch',()=>map.getCanvas().style.cursor='pointer');
+  map.on('mouseleave','ch',()=>map.getCanvas().style.cursor='');
+
+  // sweep bars
+  const bars=document.getElementById('bars');
+  const mx=Math.max(...YEARS.map(y=>hist[y]||0),1);
+  YEARS.forEach(y=>{const d=document.createElement('div');d.className='bar';
+    d.innerHTML=`<i style="height:${(hist[y]||0)/mx*44+2}px;background:${YC[y]}"></i><span>${String(y).slice(2)}</span>`;
+    d.onclick=()=>{document.getElementById('yr').value=y;applyYear(y)};bars.appendChild(d)});
+
+  // denomination chips
+  const denoms=[...new Set(churches.features.map(f=>f.properties.denom))].sort();
+  const chips=document.getElementById('chips');
+  denoms.forEach(dn=>{const c=document.createElement('span');c.className='chip on';c.textContent=dn;
+    activeDenoms.add(dn);
+    c.onclick=()=>{c.classList.toggle('on');c.classList.contains('on')?activeDenoms.add(dn):activeDenoms.delete(dn);applyYear(+document.getElementById('yr').value)};
+    chips.appendChild(c)});
+
+  document.getElementById('sweep').style.display='block';
+  document.getElementById('yr').oninput=e=>applyYear(+e.target.value);
+  applyYear(2023);
+}
+
+function applyYear(y){
+  document.getElementById('yearReadout').textContent=y;
+  const shown=['pre-2016',...YEARS.filter(v=>v<=y).map(String)];
+  map.setFilter('ch',['all',
+    ['in',['get','built'],['literal',[...shown,'undetected']]],
+    ['in',['get','denom'],['literal',[...activeDenoms]]]]);
+  const cum=churches.features.filter(f=>shown.includes(f.properties.built)&&f.properties.built!=='pre-2016'&&activeDenoms.has(f.properties.denom)).length;
+  document.getElementById('cumCount').textContent=`+${cum.toLocaleString()} new since 2016`;
+  document.querySelectorAll('.bar').forEach((b,i)=>b.classList.toggle('on',YEARS[i]<=y));
+}
+</script>
+</body>
+</html>
