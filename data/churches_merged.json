@@ -1,0 +1,839 @@
+[
+ {
+  "osm_id": "node/2692213592",
+  "name": "St. Marks Luthern Church",
+  "denomination": "lutheran",
+  "lat": 15.8276126,
+  "lon": 80.3587033,
+  "start_date": "",
+  "source": "osm"
+ },
+ {
+  "osm_id": "node/3389893926",
+  "name": "St Paul's Lutheran Church",
+  "denomination": "protestant",
+  "lat": 16.4309769,
+  "lon": 80.5670602,
+  "start_date": "",
+  "source": "osm"
+ },
+ {
+  "osm_id": "node/4344118607",
+  "name": "",
+  "denomination": "",
+  "lat": 16.2395915,
+  "lon": 80.6323606,
+  "start_date": "",
+  "source": "osm"
+ },
+ {
+  "osm_id": "node/5030747526",
+  "name": "",
+  "denomination": "",
+  "lat": 16.1998893,
+  "lon": 80.5228553,
+  "start_date": "",
+  "source": "osm"
+ },
+ {
+  "osm_id": "node/5358187205",
+  "name": "Church",
+  "denomination": "catholic",
+  "lat": 16.3992706,
+  "lon": 80.6240767,
+  "start_date": "",
+  "source": "osm"
+ },
+ {
+  "osm_id": "node/5358229709",
+  "name": "Lutheran Church",
+  "denomination": "lutheran",
+  "lat": 16.396105,
+  "lon": 80.6256521,
+  "start_date": "",
+  "source": "osm"
+ },
+ {
+  "osm_id": "node/5358851890",
+  "name": "Church",
+  "denomination": "",
+  "lat": 16.4495927,
+  "lon": 80.6106546,
+  "start_date": "",
+  "source": "osm"
+ },
+ {
+  "osm_id": "node/5448416230",
+  "name": "",
+  "denomination": "",
+  "lat": 16.2303007,
+  "lon": 80.049189,
+  "start_date": "",
+  "source": "osm"
+ },
+ {
+  "osm_id": "node/5640977533",
+  "name": "AELC church",
+  "denomination": "",
+  "lat": 16.4452026,
+  "lon": 80.6104933,
+  "start_date": "",
+  "source": "osm"
+ },
+ {
+  "osm_id": "node/5839943685",
+  "name": "Lutheran church",
+  "denomination": "",
+  "lat": 16.4611012,
+  "lon": 80.6182045,
+  "start_date": "",
+  "source": "osm"
+ },
+ {
+  "osm_id": "node/6183016686",
+  "name": "RCM church",
+  "denomination": "",
+  "lat": 16.4806825,
+  "lon": 80.6152789,
+  "start_date": "",
+  "source": "osm"
+ },
+ {
+  "osm_id": "node/6183019085",
+  "name": "Lutheran church",
+  "denomination": "",
+  "lat": 16.4808884,
+  "lon": 80.6143056,
+  "start_date": "",
+  "source": "osm"
+ },
+ {
+  "osm_id": "node/6313847985",
+  "name": "Golden holi gaspal church",
+  "denomination": "",
+  "lat": 16.4274783,
+  "lon": 80.6579321,
+  "start_date": "",
+  "source": "osm"
+ },
+ {
+  "osm_id": "node/6776221603",
+  "name": "church",
+  "denomination": "",
+  "lat": 16.3803829,
+  "lon": 80.658859,
+  "start_date": "",
+  "source": "osm"
+ },
+ {
+  "osm_id": "node/7243948027",
+  "name": "",
+  "denomination": "",
+  "lat": 16.0164851,
+  "lon": 80.8205156,
+  "start_date": "",
+  "source": "osm"
+ },
+ {
+  "osm_id": "node/7244172149",
+  "name": "",
+  "denomination": "",
+  "lat": 16.3162509,
+  "lon": 80.4262422,
+  "start_date": "",
+  "source": "osm"
+ },
+ {
+  "osm_id": "node/7246549559",
+  "name": "",
+  "denomination": "",
+  "lat": 16.2917424,
+  "lon": 80.4426147,
+  "start_date": "",
+  "source": "osm"
+ },
+ {
+  "osm_id": "node/7246549566",
+  "name": "",
+  "denomination": "",
+  "lat": 16.3071591,
+  "lon": 80.3719569,
+  "start_date": "",
+  "source": "osm"
+ },
+ {
+  "osm_id": "node/7693976349",
+  "name": "Sagarmatha Aalayamu",
+  "denomination": "",
+  "lat": 16.5568588,
+  "lon": 79.3010151,
+  "start_date": "",
+  "source": "osm"
+ },
+ {
+  "osm_id": "node/7815379869",
+  "name": "",
+  "denomination": "",
+  "lat": 16.4829122,
+  "lon": 79.4021607,
+  "start_date": "",
+  "source": "osm"
+ },
+ {
+  "osm_id": "node/9731572927",
+  "name": "Krupa Ministries",
+  "denomination": "",
+  "lat": 16.5371183,
+  "lon": 79.9042829,
+  "start_date": "",
+  "source": "osm"
+ },
+ {
+  "osm_id": "node/9732093089",
+  "name": "Church",
+  "denomination": "",
+  "lat": 16.5402378,
+  "lon": 79.9064728,
+  "start_date": "",
+  "source": "osm"
+ },
+ {
+  "osm_id": "node/9794088122",
+  "name": "",
+  "denomination": "",
+  "lat": 15.8568189,
+  "lon": 80.3955587,
+  "start_date": "",
+  "source": "osm"
+ },
+ {
+  "osm_id": "node/9794247510",
+  "name": "Hosanna mandiram ,ravela",
+  "denomination": "",
+  "lat": 16.4181406,
+  "lon": 80.353225,
+  "start_date": "",
+  "source": "osm"
+ },
+ {
+  "osm_id": "node/9794283138",
+  "name": "Luthern Chruch",
+  "denomination": "",
+  "lat": 16.4204886,
+  "lon": 80.3484598,
+  "start_date": "",
+  "source": "osm"
+ },
+ {
+  "osm_id": "node/9803530587",
+  "name": "Punitha Francis Showri Vaari Devalayam",
+  "denomination": "roman_catholic",
+  "lat": 16.3086091,
+  "lon": 80.3696708,
+  "start_date": "",
+  "source": "osm"
+ },
+ {
+  "osm_id": "node/9886961526",
+  "name": "Church",
+  "denomination": "",
+  "lat": 16.4328406,
+  "lon": 79.7120027,
+  "start_date": "",
+  "source": "osm"
+ },
+ {
+  "osm_id": "node/11009581439",
+  "name": "Lutheran church",
+  "denomination": "",
+  "lat": 15.9999176,
+  "lon": 80.4758915,
+  "start_date": "",
+  "source": "osm"
+ },
+ {
+  "osm_id": "node/11009670066",
+  "name": "Lutheran church",
+  "denomination": "",
+  "lat": 16.022331,
+  "lon": 80.4857371,
+  "start_date": "",
+  "source": "osm"
+ },
+ {
+  "osm_id": "node/11031757866",
+  "name": "Gorlavaripalem Chruch",
+  "denomination": "",
+  "lat": 16.3574116,
+  "lon": 80.4052251,
+  "start_date": "",
+  "source": "osm"
+ },
+ {
+  "osm_id": "node/11036516107",
+  "name": "Chruch",
+  "denomination": "",
+  "lat": 16.3571764,
+  "lon": 80.4016377,
+  "start_date": "",
+  "source": "osm"
+ },
+ {
+  "osm_id": "node/11183259475",
+  "name": "",
+  "denomination": "",
+  "lat": 16.4086857,
+  "lon": 80.2949836,
+  "start_date": "",
+  "source": "osm"
+ },
+ {
+  "osm_id": "node/11204144192",
+  "name": "",
+  "denomination": "",
+  "lat": 15.8988576,
+  "lon": 80.4506535,
+  "start_date": "",
+  "source": "osm"
+ },
+ {
+  "osm_id": "node/11204210642",
+  "name": "CBZ church",
+  "denomination": "baptist",
+  "lat": 15.9048763,
+  "lon": 80.4731376,
+  "start_date": "",
+  "source": "osm"
+ },
+ {
+  "osm_id": "node/11204210645",
+  "name": "ST Peter luthrain church",
+  "denomination": "",
+  "lat": 15.9004448,
+  "lon": 80.4569189,
+  "start_date": "",
+  "source": "osm"
+ },
+ {
+  "osm_id": "node/11365505671",
+  "name": "",
+  "denomination": "",
+  "lat": 16.2262876,
+  "lon": 80.805071,
+  "start_date": "",
+  "source": "osm"
+ },
+ {
+  "osm_id": "node/11365507752",
+  "name": "Lutharan church",
+  "denomination": "",
+  "lat": 16.0457681,
+  "lon": 80.8690907,
+  "start_date": "",
+  "source": "osm"
+ },
+ {
+  "osm_id": "node/11583576887",
+  "name": "",
+  "denomination": "",
+  "lat": 16.495271,
+  "lon": 80.6021936,
+  "start_date": "",
+  "source": "osm"
+ },
+ {
+  "osm_id": "node/11583685300",
+  "name": "",
+  "denomination": "",
+  "lat": 16.5650943,
+  "lon": 80.4120649,
+  "start_date": "",
+  "source": "osm"
+ },
+ {
+  "osm_id": "node/11583748132",
+  "name": "",
+  "denomination": "",
+  "lat": 16.5449871,
+  "lon": 80.4773617,
+  "start_date": "",
+  "source": "osm"
+ },
+ {
+  "osm_id": "node/11591633653",
+  "name": "Laymen's Evangelical Fellowship,Stuvartpuram",
+  "denomination": "",
+  "lat": 15.8681073,
+  "lon": 80.4029279,
+  "start_date": "",
+  "source": "osm"
+ },
+ {
+  "osm_id": "node/11591656883",
+  "name": "The Salvation Army",
+  "denomination": "",
+  "lat": 15.8688174,
+  "lon": 80.4052371,
+  "start_date": "",
+  "source": "osm"
+ },
+ {
+  "osm_id": "node/11687222921",
+  "name": "",
+  "denomination": "",
+  "lat": 16.3002135,
+  "lon": 80.4585263,
+  "start_date": "",
+  "source": "osm"
+ },
+ {
+  "osm_id": "node/11687227901",
+  "name": "",
+  "denomination": "",
+  "lat": 16.3939973,
+  "lon": 80.5421112,
+  "start_date": "",
+  "source": "osm"
+ },
+ {
+  "osm_id": "node/11693541262",
+  "name": "",
+  "denomination": "",
+  "lat": 16.1771153,
+  "lon": 80.2367154,
+  "start_date": "",
+  "source": "osm"
+ },
+ {
+  "osm_id": "node/11694014026",
+  "name": "",
+  "denomination": "",
+  "lat": 15.798062,
+  "lon": 80.1798538,
+  "start_date": "",
+  "source": "osm"
+ },
+ {
+  "osm_id": "node/11694014040",
+  "name": "",
+  "denomination": "",
+  "lat": 15.8219531,
+  "lon": 80.1653056,
+  "start_date": "",
+  "source": "osm"
+ },
+ {
+  "osm_id": "node/11694014042",
+  "name": "",
+  "denomination": "",
+  "lat": 15.8226389,
+  "lon": 80.163699,
+  "start_date": "",
+  "source": "osm"
+ },
+ {
+  "osm_id": "node/11803993490",
+  "name": "Mount Carmel",
+  "denomination": "",
+  "lat": 16.2850676,
+  "lon": 80.2625546,
+  "start_date": "",
+  "source": "osm"
+ },
+ {
+  "osm_id": "node/11980889514",
+  "name": "chirst of jesus prardhana mandhirm",
+  "denomination": "",
+  "lat": 16.3027183,
+  "lon": 80.6041501,
+  "start_date": "",
+  "source": "osm"
+ },
+ {
+  "osm_id": "node/11993388847",
+  "name": "Salvesh Narvi Church",
+  "denomination": "",
+  "lat": 15.908928,
+  "lon": 80.4635378,
+  "start_date": "",
+  "source": "osm"
+ },
+ {
+  "osm_id": "node/12001964893",
+  "name": "",
+  "denomination": "",
+  "lat": 16.2919734,
+  "lon": 80.4386323,
+  "start_date": "",
+  "source": "osm"
+ },
+ {
+  "osm_id": "node/12215709855",
+  "name": "Manna Church",
+  "denomination": "",
+  "lat": 16.3524168,
+  "lon": 80.7119875,
+  "start_date": "",
+  "source": "osm"
+ },
+ {
+  "osm_id": "node/12215709989",
+  "name": "IPC Church Vallabhapuram",
+  "denomination": "",
+  "lat": 16.3520436,
+  "lon": 80.7119942,
+  "start_date": "",
+  "source": "osm"
+ },
+ {
+  "osm_id": "node/12265188455",
+  "name": "Shalemraja Ministries",
+  "denomination": "",
+  "lat": 16.1159827,
+  "lon": 80.4761459,
+  "start_date": "",
+  "source": "osm"
+ },
+ {
+  "osm_id": "node/13072308945",
+  "name": "KAKANI SWASTHISALA",
+  "denomination": "",
+  "lat": 16.3367285,
+  "lon": 80.4855211,
+  "start_date": "",
+  "source": "osm"
+ },
+ {
+  "osm_id": "node/13088346073",
+  "name": "Calvary Zion Ministries",
+  "denomination": "",
+  "lat": 16.203401,
+  "lon": 80.5221512,
+  "start_date": "",
+  "source": "osm"
+ },
+ {
+  "osm_id": "node/13305880173",
+  "name": "Lutheran Church",
+  "denomination": "",
+  "lat": 16.0078838,
+  "lon": 80.2757271,
+  "start_date": "",
+  "source": "osm"
+ },
+ {
+  "osm_id": "node/13437251873",
+  "name": "Glory church",
+  "denomination": "",
+  "lat": 16.023288,
+  "lon": 80.870895,
+  "start_date": "",
+  "source": "osm"
+ },
+ {
+  "osm_id": "node/13518977009",
+  "name": "Ponnur church",
+  "denomination": "",
+  "lat": 16.0606392,
+  "lon": 80.5495377,
+  "start_date": "",
+  "source": "osm"
+ },
+ {
+  "osm_id": "node/13518977012",
+  "name": "Old ponnur church",
+  "denomination": "",
+  "lat": 16.065337,
+  "lon": 80.5457224,
+  "start_date": "",
+  "source": "osm"
+ },
+ {
+  "osm_id": "node/13597579622",
+  "name": "RCM Church",
+  "denomination": "",
+  "lat": 16.0362536,
+  "lon": 80.8394996,
+  "start_date": "",
+  "source": "osm"
+ },
+ {
+  "osm_id": "node/13686105095",
+  "name": "",
+  "denomination": "",
+  "lat": 15.890569,
+  "lon": 80.439044,
+  "start_date": "",
+  "source": "osm"
+ },
+ {
+  "osm_id": "way/206854676",
+  "name": "",
+  "denomination": "",
+  "lat": 15.7888236,
+  "lon": 80.3134572,
+  "start_date": "",
+  "source": "osm"
+ },
+ {
+  "osm_id": "way/206854933",
+  "name": "",
+  "denomination": "",
+  "lat": 15.7876117,
+  "lon": 80.3119351,
+  "start_date": "",
+  "source": "osm"
+ },
+ {
+  "osm_id": "way/206855065",
+  "name": "Salvation Army",
+  "denomination": "",
+  "lat": 15.7869652,
+  "lon": 80.3111506,
+  "start_date": "",
+  "source": "osm"
+ },
+ {
+  "osm_id": "way/331893148",
+  "name": "Catholic Chruch",
+  "denomination": "",
+  "lat": 16.4294089,
+  "lon": 80.5813764,
+  "start_date": "",
+  "source": "osm"
+ },
+ {
+  "osm_id": "way/411364383",
+  "name": "Sheba Prayer Hall",
+  "denomination": "",
+  "lat": 16.2786886,
+  "lon": 80.4422727,
+  "start_date": "",
+  "source": "osm"
+ },
+ {
+  "osm_id": "way/667345640",
+  "name": "Luthern Church",
+  "denomination": "lutheran",
+  "lat": 16.0725852,
+  "lon": 80.3322059,
+  "start_date": "",
+  "source": "osm"
+ },
+ {
+  "osm_id": "way/733440869",
+  "name": "Chruch",
+  "denomination": "",
+  "lat": 16.5536944,
+  "lon": 79.5515195,
+  "start_date": "",
+  "source": "osm"
+ },
+ {
+  "osm_id": "way/776399064",
+  "name": "",
+  "denomination": "",
+  "lat": 16.0150306,
+  "lon": 80.8192859,
+  "start_date": "",
+  "source": "osm"
+ },
+ {
+  "osm_id": "way/781596767",
+  "name": "",
+  "denomination": "",
+  "lat": 16.4187904,
+  "lon": 79.7517554,
+  "start_date": "",
+  "source": "osm"
+ },
+ {
+  "osm_id": "way/1060994779",
+  "name": "",
+  "denomination": "",
+  "lat": 16.0094976,
+  "lon": 80.8425941,
+  "start_date": "",
+  "source": "osm"
+ },
+ {
+  "osm_id": "way/1066072371",
+  "name": "Bethany Covenant Church",
+  "denomination": "",
+  "lat": 16.4763669,
+  "lon": 79.9143174,
+  "start_date": "",
+  "source": "osm"
+ },
+ {
+  "osm_id": "way/1119817314",
+  "name": "Bethel prayer hall",
+  "denomination": "",
+  "lat": 15.9155821,
+  "lon": 80.4941233,
+  "start_date": "",
+  "source": "osm"
+ },
+ {
+  "osm_id": "way/1119817315",
+  "name": "Philadelphia Church of God",
+  "denomination": "",
+  "lat": 15.9132522,
+  "lon": 80.4954068,
+  "start_date": "",
+  "source": "osm"
+ },
+ {
+  "osm_id": "way/1119817346",
+  "name": "The Salvation Army Prayer Hall - Vidya Nagar Corps",
+  "denomination": "",
+  "lat": 15.9090075,
+  "lon": 80.4910912,
+  "start_date": "",
+  "source": "osm"
+ },
+ {
+  "osm_id": "way/1119817350",
+  "name": "Father Heyer Lutheran Church",
+  "denomination": "",
+  "lat": 15.9118078,
+  "lon": 80.488275,
+  "start_date": "",
+  "source": "osm"
+ },
+ {
+  "osm_id": "way/1119817415",
+  "name": "New Covenant Church",
+  "denomination": "",
+  "lat": 15.9045168,
+  "lon": 80.4863826,
+  "start_date": "",
+  "source": "osm"
+ },
+ {
+  "osm_id": "way/1185212314",
+  "name": "",
+  "denomination": "",
+  "lat": 16.0286888,
+  "lon": 80.4821032,
+  "start_date": "",
+  "source": "osm"
+ },
+ {
+  "osm_id": "way/1246805249",
+  "name": "church",
+  "denomination": "",
+  "lat": 16.1859758,
+  "lon": 80.6594673,
+  "start_date": "",
+  "source": "osm"
+ },
+ {
+  "osm_id": "way/1292095395",
+  "name": "",
+  "denomination": "",
+  "lat": 16.409063,
+  "lon": 80.5575633,
+  "start_date": "",
+  "source": "osm"
+ },
+ {
+  "osm_id": "way/1292100815",
+  "name": "",
+  "denomination": "",
+  "lat": 16.4056478,
+  "lon": 80.5551349,
+  "start_date": "",
+  "source": "osm"
+ },
+ {
+  "osm_id": "way/1319666163",
+  "name": "Church Of God, Thallayapalem Katta",
+  "denomination": "",
+  "lat": 16.5380418,
+  "lon": 80.5320592,
+  "start_date": "",
+  "source": "osm"
+ },
+ {
+  "osm_id": "way/1323133306",
+  "name": "",
+  "denomination": "",
+  "lat": 16.2637522,
+  "lon": 80.7423375,
+  "start_date": "",
+  "source": "osm"
+ },
+ {
+  "osm_id": "way/1324736007",
+  "name": "",
+  "denomination": "",
+  "lat": 16.4275066,
+  "lon": 80.58865,
+  "start_date": "",
+  "source": "osm"
+ },
+ {
+  "osm_id": "way/1333245501",
+  "name": "Nidubrolu church",
+  "denomination": "",
+  "lat": 16.062431,
+  "lon": 80.5598564,
+  "start_date": "",
+  "source": "osm"
+ },
+ {
+  "osm_id": "way/1413533151",
+  "name": "Infant Jesus Cathedral,Guntur",
+  "denomination": "",
+  "lat": 16.2897785,
+  "lon": 80.2604314,
+  "start_date": "",
+  "source": "osm"
+ },
+ {
+  "osm_id": "way/1422640049",
+  "name": "",
+  "denomination": "",
+  "lat": 16.3370014,
+  "lon": 80.4859986,
+  "start_date": "",
+  "source": "osm"
+ },
+ {
+  "osm_id": "way/1422643690",
+  "name": "Church area",
+  "denomination": "",
+  "lat": 16.3359154,
+  "lon": 80.4853919,
+  "start_date": "",
+  "source": "osm"
+ },
+ {
+  "osm_id": "way/1436652913",
+  "name": "Bible mission",
+  "denomination": "",
+  "lat": 16.2986014,
+  "lon": 80.4455244,
+  "start_date": "",
+  "source": "osm"
+ },
+ {
+  "osm_id": "way/1465017696",
+  "name": "Glory Church",
+  "denomination": "",
+  "lat": 16.0312548,
+  "lon": 80.8715434,
+  "start_date": "",
+  "source": "osm"
+ },
+ {
+  "osm_id": "way/1493572688",
+  "name": "",
+  "denomination": "",
+  "lat": 16.3021331,
+  "lon": 80.3806774,
+  "start_date": "",
+  "source": "osm"
+ }
+]
