@@ -36,17 +36,29 @@ jobs:
       - name: "Stage D: merge"
         run: python3 scripts/06_analyze.py merge
 
+      - name: "Checkpoint: commit sweep + merge results"
+        run: |
+          git config user.name "svsashank"
+          git config user.email "svsashank@users.noreply.github.com"
+          git add data/
+          git diff --cached --quiet || git commit -m "checkpoint: sweep + merge $(date -u +%H:%MZ)"
+          git push || true
+
       - name: "Stage E: Earth Engine building dating (needs EE_SA_JSON + EE_PROJECT secrets)"
         if: env.EE_SA_JSON != ''
         run: |
           echo "$EE_SA_JSON" > /tmp/sa.json
-          python3 scripts/05_ee_building_dates.py --project "$EE_PROJECT" --sa-key /tmp/sa.json
+          rm -f data/ee_error.txt
+          python3 scripts/05_ee_building_dates.py --project "$EE_PROJECT" --sa-key /tmp/sa.json 2>&1 | tee /tmp/ee.log || true
+          if [ ! -f data/churches_dated.json ]; then tail -40 /tmp/ee.log > data/ee_error.txt; fi
 
       - name: "Stage F: report + map data"
         if: env.EE_SA_JSON != ''
-        run: python3 scripts/06_analyze.py report
+        run: |
+          if [ -f data/churches_dated.json ]; then python3 scripts/06_analyze.py report; fi
 
       - name: Commit results
+        if: always()
         run: |
           git config user.name "svsashank"
           git config user.email "svsashank@users.noreply.github.com"
