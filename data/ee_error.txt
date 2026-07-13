@@ -1,0 +1,6 @@
+2269 points to date
+  1000/2269
+  2000/2269
+  2269/2269
+Counter({'pre-2016': 2158, 'undetected': 67, '2017': 14, '2022': 8, '2018': 6, '2021': 6, '2019': 5, '2020': 4, '2023': 1})
+-> /home/runner/work/churches-in-india/churches-in-india/scripts/../data/ap/churches_dated.json
