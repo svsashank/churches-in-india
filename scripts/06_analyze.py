@@ -48,12 +48,13 @@ def merge():
             return []
     places = load("places_churches.json")
     osm = load("osm_churches.json")
-    if not places and not osm:
+    openp = load("open_places_churches.json")
+    if not places and not osm and not openp:
         raise SystemExit("no input lists found")
     for p in places: p["source"] = "gmaps"
     for o in osm: o["source"] = "osm"
 
-    inside = [c for c in places + osm if boundary.contains(Point(c["lon"], c["lat"]))]
+    inside = [c for c in places + openp + osm if boundary.contains(Point(c["lon"], c["lat"]))]
     merged = []
     for c in inside:  # greedy dedupe
         if any(dist_m(c, m) <= 40 for m in merged):
@@ -61,7 +62,7 @@ def merge():
         merged.append(c)
     out = os.path.join(BASE, "churches_merged.json")
     json.dump(merged, open(out, "w"), ensure_ascii=False, indent=1)
-    print(f"{len(places)} gmaps + {len(osm)} osm -> {len(inside)} in-boundary -> {len(merged)} after dedupe -> {out}")
+    print(f"{len(places)} gmaps + {len(openp)} overture + {len(osm)} osm -> {len(inside)} in-boundary -> {len(merged)} after dedupe -> {out}")
 
 def report():
     churches = json.load(open(os.path.join(BASE, "churches_dated.json")))

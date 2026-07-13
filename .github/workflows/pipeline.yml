@@ -8,6 +8,9 @@ on:
       max_calls:
         description: "Places API call cap this run"
         default: "999999"
+      source:
+        description: "Location source: free (Overture) or google"
+        default: "free"
 
 permissions:
   contents: write
@@ -17,6 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       REGION: ${{ github.event.inputs.region || 'ap' }}
+      SOURCE: ${{ github.event.inputs.source || 'free' }}
       MAX_CALLS: ${{ github.event.inputs.max_calls || '999999' }}
       GOOGLE_MAPS_API_KEY: ${{ secrets.GOOGLE_MAPS_API_KEY }}
       EE_SA_JSON: ${{ secrets.EE_SA_JSON }}
@@ -29,7 +33,7 @@ jobs:
           python-version: '3.12'
 
       - name: Install deps
-        run: pip install -q shapely requests beautifulsoup4 earthengine-api
+        run: pip install -q shapely requests beautifulsoup4 earthengine-api overturemaps pyarrow pandas
 
       - name: "Stage A: OSM churches (keyless)"
         continue-on-error: true
@@ -39,8 +43,12 @@ jobs:
         continue-on-error: true
         run: python3 scripts/07_catholic_calibration.py
 
-      - name: "Stage C: Places sweep (needs GOOGLE_MAPS_API_KEY secret)"
-        if: env.GOOGLE_MAPS_API_KEY != ''
+      - name: "Stage C-free: Overture open places (no cost)"
+        if: env.SOURCE == 'free'
+        run: python3 scripts/02_open_places.py
+
+      - name: "Stage C: Google Places sweep (paid, only when source=google)"
+        if: env.SOURCE == 'google' && env.GOOGLE_MAPS_API_KEY != ''
         run: python3 scripts/03_places_sweep.py
 
       - name: "Stage D: merge"
