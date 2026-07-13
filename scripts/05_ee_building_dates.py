@@ -22,7 +22,7 @@ import argparse, json, os
 import ee
 
 BASE = os.path.join(os.path.dirname(__file__), "..", "data")
-THRESH = 0.5
+THRESH = 0.4  # on MAX presence within buffer
 YEARS = list(range(2016, 2024))
 
 def main():
@@ -56,10 +56,10 @@ def main():
     for i in range(0, len(churches), CHUNK):
         chunk = churches[i:i + CHUNK]
         fc = ee.FeatureCollection([
-            ee.Feature(ee.Geometry.Point([c["lon"], c["lat"]]).buffer(15), {"idx": i + j})
+            ee.Feature(ee.Geometry.Point([c["lon"], c["lat"]]).buffer(40), {"idx": i + j})
             for j, c in enumerate(chunk)
         ])
-        sampled = stack.reduceRegions(collection=fc, reducer=ee.Reducer.mean(), scale=4).getInfo()
+        sampled = stack.reduceRegions(collection=fc, reducer=ee.Reducer.max(), scale=4).getInfo()
         for f in sampled["features"]:
             props = f["properties"]
             c = churches[props["idx"]]

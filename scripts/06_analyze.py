@@ -69,7 +69,7 @@ def report():
 
     hist = Counter(c["built"] for c in churches)
     lines = ["GUNTUR PILOT - CHURCH BUILDING APPEARANCE YEARS",
-             "(Open Buildings 2.5D Temporal, threshold 0.5, 15m buffer)", ""]
+             "(Open Buildings 2.5D Temporal, max presence in 40m buffer, threshold 0.4)", ""]
     for k in ["pre-2016"] + [str(y) for y in range(2017, 2024)] + ["undetected"]:
         lines.append(f"  {k:>10}: {hist.get(k, 0):5d}  {'#' * (hist.get(k, 0) // 5)}")
     lines += ["", "By denomination (name heuristic) x new-build 2017-2023:"]
