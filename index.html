@@ -54,7 +54,7 @@
 <div id="map"></div>
 <div id="panel">
   <div class="eyebrow">CHURCHES IN INDIA · PILOT 01</div>
-  <h1>Guntur — dating church construction from orbit</h1>
+  <h1><span id='regionTitle'>Andhra Pradesh</span> — dating church construction from orbit</h1>
   <div class="sub">Scraped church locations × Google Open Buildings 2.5D Temporal (Sentinel-2). The year a structure first appears at a church's coordinates is its estimated construction year, 2016–2023.</div>
 
   <div class="block">
@@ -94,32 +94,35 @@
 const YEARS=[2017,2018,2019,2020,2021,2022,2023];
 const YC={'2017':'#f5d76e','2018':'#f7b955','2019':'#f79a3e','2020':'#f5762b','2021':'#ef4e20','2022':'#e02f2f','2023':'#ff5c8a','pre-2016':'#5b7a9d','undetected':'#3a4356'};
 
+const R=new URLSearchParams(location.search).get('region')||'ap';
+const D=p=>`data/${R}/${p}`;
 const map=new maplibregl.Map({
   container:'map',
   style:{version:8,glyphs:"https://demotiles.maplibre.org/font/{fontstack}/{range}.pbf",
     sources:{esri:{type:'raster',tiles:['https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'],tileSize:256,attribution:'Esri World Imagery'}},
     layers:[{id:'base',type:'raster',source:'esri',paint:{'raster-saturation':-0.55,'raster-brightness-max':0.85}}]},
-  center:[80.15,16.2],zoom:8.6,attributionControl:false});
+  center:R==='ap'?[79.8,15.9]:[80.15,16.2],zoom:R==='ap'?6.7:8.6,attributionControl:false});
 map.addControl(new maplibregl.NavigationControl({showCompass:false}),'bottom-right');
 map.addControl(new maplibregl.AttributionControl({compact:true}),'bottom-left');
 
 const S=document.getElementById('status');
+if(R!=='ap')document.getElementById('regionTitle').textContent=R[0].toUpperCase()+R.slice(1);
 let churches=null,activeDenoms=new Set();
 
 map.on('load',async()=>{
-  map.addSource('boundary',{type:'geojson',data:'data/guntur_boundary.geojson'});
+  map.addSource('boundary',{type:'geojson',data:D('boundary.geojson')});
   map.addLayer({id:'boundary-line',type:'line',source:'boundary',paint:{'line-color':'#ffb454','line-width':1.6,'line-opacity':.9}});
-  map.addSource('grid',{type:'geojson',data:'data/search_grid.geojson'});
+  map.addSource('grid',{type:'geojson',data:D('search_grid.geojson')});
   map.addLayer({id:'grid-line',type:'line',source:'grid',paint:{'line-color':'#8a94a6','line-width':.4,'line-opacity':.16}});
 
   try{
-    const r=await fetch('data/churches.geojson');
+    const r=await fetch(D('churches.geojson'));
     if(!r.ok)throw 0;
     churches=await r.json();
     initChurches();
   }catch(e){
     try{
-      const r2=await fetch('data/locations.geojson').then(x=>x.ok?x:fetch('data/osm_churches.geojson'));
+      const r2=await fetch(D('locations.geojson')).then(x=>x.ok?x:fetch(D('osm_churches.geojson')));
       if(r2.ok){
         const osm=await r2.json();
         map.addSource('osm',{type:'geojson',data:osm});

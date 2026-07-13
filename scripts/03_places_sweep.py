@@ -20,10 +20,12 @@ cells without calling the API.
 import json, math, os, sys, time
 import urllib.request
 
-BASE = os.path.join(os.path.dirname(__file__), "..", "data")
+REGION = os.environ.get("REGION", "guntur")
+BASE = os.path.join(os.path.dirname(__file__), "..", "data", REGION)
 GRID = os.path.join(BASE, "search_grid.geojson")
 CKPT = os.path.join(BASE, "places_checkpoint.json")
 OUT = os.path.join(BASE, "places_churches.json")
+MAX_CALLS = int(os.environ.get("MAX_CALLS", "999999"))
 MIN_CELL_KM = 0.4
 API = "https://places.googleapis.com/v1/places:searchNearby"
 FIELDS = "places.id,places.displayName,places.location,places.types,places.rating,places.userRatingCount,places.formattedAddress"
@@ -58,7 +60,7 @@ def main():
 
     grid = json.load(open(GRID))["features"]
     # work queue: (center_lon, center_lat, half_size_km)
-    queue = [(f["properties"]["center"][0], f["properties"]["center"][1], 1.5) for f in grid]
+    queue = [(f["properties"]["center"][0], f["properties"]["center"][1], f["properties"].get("half_km", 1.5)) for f in grid]
     if dry:
         print(f"{len(queue)} seed cells; expect ~1.2-2.5x that in total calls after subdivision")
         return
@@ -67,10 +69,16 @@ def main():
     if os.path.exists(CKPT):
         ck = json.load(open(CKPT))
         done, places = set(ck["done"]), ck["places"]
-        print(f"resuming: {len(done)} cells done, {len(places)} churches so far")
+        if ck.get("pending"):
+            queue = [tuple(p) for p in ck["pending"]]
+        print(f"resuming: {len(done)} cells done, {len(places)} churches, {len(queue)} cells queued")
 
     calls = 0
+    capped = False
     while queue:
+        if calls >= MAX_CALLS:
+            capped = True
+            break
         lon, lat, half_km = queue.pop()
         cell_id = f"{lon:.5f},{lat:.5f},{half_km:.2f}"
         if cell_id in done:
@@ -102,9 +110,10 @@ def main():
             print(f"calls={calls} queue={len(queue)} churches={len(places)}")
         time.sleep(0.05)
 
-    json.dump({"done": list(done), "places": places}, open(CKPT, "w"))
+    json.dump({"done": list(done), "places": places, "pending": [list(q) for q in queue]}, open(CKPT, "w"))
     json.dump(list(places.values()), open(OUT, "w"), ensure_ascii=False, indent=1)
-    print(f"DONE: {calls} calls, {len(places)} unique churches -> {OUT}")
+    tag = f"CAPPED at {MAX_CALLS} (resume next run, {len(queue)} cells pending)" if capped else "DONE"
+    print(f"{tag}: {calls} calls, {len(places)} unique churches -> {OUT}")
 
 if __name__ == "__main__":
     main()

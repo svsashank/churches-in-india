@@ -15,7 +15,8 @@ Usage: python3 06_analyze.py merge | report
 import json, math, os, sys, re
 from collections import Counter
 
-BASE = os.path.join(os.path.dirname(__file__), "..", "data")
+REGION = os.environ.get("REGION", "guntur")
+BASE = os.path.join(os.path.dirname(__file__), "..", "data", REGION)
 
 def dist_m(a, b):
     dlat = (a["lat"] - b["lat"]) * 111000
@@ -39,7 +40,7 @@ def classify(name):
 
 def merge():
     from shapely.geometry import shape, Point
-    boundary = shape(json.load(open(os.path.join(BASE, "guntur_boundary.geojson")))["features"][0]["geometry"])
+    boundary = shape(json.load(open(os.path.join(BASE, "boundary.geojson")))["features"][0]["geometry"])
     def load(name):
         try:
             return json.load(open(os.path.join(BASE, name)))

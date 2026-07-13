@@ -1,6 +1,13 @@
 name: pipeline
 on:
-  workflow_dispatch: {}
+  workflow_dispatch:
+    inputs:
+      region:
+        description: "Region (data/<region>/)"
+        default: "ap"
+      max_calls:
+        description: "Places API call cap this run"
+        default: "999999"
 
 permissions:
   contents: write
@@ -9,6 +16,8 @@ jobs:
   run:
     runs-on: ubuntu-latest
     env:
+      REGION: ${{ github.event.inputs.region || 'ap' }}
+      MAX_CALLS: ${{ github.event.inputs.max_calls || '999999' }}
       GOOGLE_MAPS_API_KEY: ${{ secrets.GOOGLE_MAPS_API_KEY }}
       EE_SA_JSON: ${{ secrets.EE_SA_JSON }}
       EE_PROJECT: ${{ secrets.EE_PROJECT }}

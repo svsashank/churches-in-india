@@ -21,7 +21,8 @@ Runs in chunks of 1000 points via getInfo; ~5k points takes minutes.
 import argparse, json, os
 import ee
 
-BASE = os.path.join(os.path.dirname(__file__), "..", "data")
+REGION = os.environ.get("REGION", "guntur")
+BASE = os.path.join(os.path.dirname(__file__), "..", "data", REGION)
 THRESH = 0.4  # on MAX presence within buffer
 YEARS = list(range(2016, 2024))
 

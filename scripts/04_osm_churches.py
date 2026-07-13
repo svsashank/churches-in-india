@@ -7,8 +7,11 @@ Usage: python3 04_osm_churches.py
 """
 import json, os, urllib.request, urllib.parse
 
-BASE = os.path.join(os.path.dirname(__file__), "..", "data")
-BBOX = "15.613,79.208,16.822,80.910"  # S,W,N,E (undivided Guntur bounds)
+REGION = os.environ.get("REGION", "guntur")
+BASE = os.path.join(os.path.dirname(__file__), "..", "data", REGION)
+_b = json.load(open(os.path.join(BASE, "boundary.geojson")))["features"][0]["geometry"]
+_c = [pt for poly in (_b["coordinates"] if _b["type"] == "MultiPolygon" else [_b["coordinates"]]) for ring in poly for pt in ring]
+BBOX = f"{min(p[1] for p in _c):.4f},{min(p[0] for p in _c):.4f},{max(p[1] for p in _c):.4f},{max(p[0] for p in _c):.4f}"
 
 query = f"""
 [out:json][timeout:120];
