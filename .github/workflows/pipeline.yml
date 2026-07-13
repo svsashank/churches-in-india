@@ -70,6 +70,13 @@ jobs:
           python3 scripts/05_ee_building_dates.py --project "$EE_PROJECT" --sa-key /tmp/sa.json 2>&1 | tee /tmp/ee.log || true
           if [ ! -f data/$REGION/churches_dated.json ]; then tail -40 /tmp/ee.log > data/ee_error.txt; fi
 
+      - name: "Stage E2: WSF settlement eras 1985-2015 (free)"
+        if: env.EE_SA_JSON != ''
+        run: |
+          if [ -f data/$REGION/churches_dated.json ]; then
+            python3 scripts/08_wsf_settlement.py --project "$EE_PROJECT" --sa-key /tmp/sa.json || echo "WSF stage failed, continuing"
+          fi
+
       - name: "Stage F: report + map data"
         if: env.EE_SA_JSON != ''
         run: |

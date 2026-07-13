@@ -64,16 +64,32 @@ def merge():
     json.dump(merged, open(out, "w"), ensure_ascii=False, indent=1)
     print(f"{len(places)} gmaps + {len(openp)} overture + {len(osm)} osm -> {len(inside)} in-boundary -> {len(merged)} after dedupe -> {out}")
 
+ERAS = ["pre-1985", "1985-1995", "1996-2005", "2006-2015"]
+
+def era_of(c):
+    b = c.get("built")
+    if b not in ("pre-2016", None):
+        return b  # 2017..2023 or undetected
+    w = c.get("wsf_year")
+    if not w:
+        return "pre-2016"
+    if w <= 1985: return "pre-1985"
+    if w <= 1995: return "1985-1995"
+    if w <= 2005: return "1996-2005"
+    return "2006-2015"
+
 def report():
     churches = json.load(open(os.path.join(BASE, "churches_dated.json")))
     for c in churches:
         c["denom"] = classify(c.get("name"))
+        c["when"] = era_of(c)
 
-    hist = Counter(c["built"] for c in churches)
-    lines = ["GUNTUR PILOT - CHURCH BUILDING APPEARANCE YEARS",
-             "(Open Buildings 2.5D Temporal, max presence in 40m buffer, threshold 0.4)", ""]
-    for k in ["pre-2016"] + [str(y) for y in range(2017, 2024)] + ["undetected"]:
-        lines.append(f"  {k:>10}: {hist.get(k, 0):5d}  {'#' * (hist.get(k, 0) // 5)}")
+    hist = Counter(c["when"] for c in churches)
+    lines = [f"{REGION.upper()} - CHURCH SITE APPEARANCE ERAS",
+             "(1985-2015: WSF Evolution settlement onset, 30m floor;",
+             " 2017-2023: Open Buildings Temporal, building-level)", ""]
+    for k in ERAS + ["pre-2016"] + [str(y) for y in range(2017, 2024)] + ["undetected"]:
+        lines.append(f"  {k:>10}: {hist.get(k, 0):5d}  {'#' * max(1, hist.get(k, 0) // 40) if hist.get(k,0) else ''}")
     lines += ["", "By denomination (name heuristic) x new-build 2017-2023:"]
     for denom in set(c["denom"] for c in churches):
         sub = [c for c in churches if c["denom"] == denom]
@@ -85,7 +101,7 @@ def report():
 
     gj = {"type": "FeatureCollection", "features": [{
         "type": "Feature",
-        "properties": {"name": c.get("name"), "built": c["built"], "denom": c["denom"],
+        "properties": {"name": c.get("name"), "built": c["when"], "denom": c["denom"],
                        "source": c.get("source"), "n_ratings": c.get("n_ratings")},
         "geometry": {"type": "Point", "coordinates": [c["lon"], c["lat"]]},
     } for c in churches]}
